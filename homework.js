@@ -6,43 +6,88 @@
 
 // 產品資料
 const products = [
-  { id: 'prod-1', title: '經典白T', category: '衣服', origin_price: 500, price: 399, images: 'https://example.com/t1.jpg' },
-  { id: 'prod-2', title: '牛仔褲', category: '褲子', origin_price: 1200, price: 899, images: 'https://example.com/p1.jpg' },
-  { id: 'prod-3', title: '帆布鞋', category: '鞋子', origin_price: 1800, price: 1299, images: 'https://example.com/s1.jpg' },
-  { id: 'prod-4', title: '棒球帽', category: '配件', origin_price: 350, price: 299, images: 'https://example.com/h1.jpg' },
-  { id: 'prod-5', title: '運動外套', category: '衣服', origin_price: 2000, price: 1599, images: 'https://example.com/j1.jpg' }
+  {
+    id: "prod-1",
+    title: "經典白T",
+    category: "衣服",
+    origin_price: 500,
+    price: 399,
+    images: "https://example.com/t1.jpg",
+  },
+  {
+    id: "prod-2",
+    title: "牛仔褲",
+    category: "褲子",
+    origin_price: 1200,
+    price: 899,
+    images: "https://example.com/p1.jpg",
+  },
+  {
+    id: "prod-3",
+    title: "帆布鞋",
+    category: "鞋子",
+    origin_price: 1800,
+    price: 1299,
+    images: "https://example.com/s1.jpg",
+  },
+  {
+    id: "prod-4",
+    title: "棒球帽",
+    category: "配件",
+    origin_price: 350,
+    price: 299,
+    images: "https://example.com/h1.jpg",
+  },
+  {
+    id: "prod-5",
+    title: "運動外套",
+    category: "衣服",
+    origin_price: 2000,
+    price: 1599,
+    images: "https://example.com/j1.jpg",
+  },
 ];
 
 // 購物車資料
 const carts = [
-  { id: 'cart-1', product: products[0], quantity: 2 },
-  { id: 'cart-2', product: products[2], quantity: 1 },
-  { id: 'cart-3', product: products[4], quantity: 1 }
+  { id: "cart-1", product: products[0], quantity: 2 },
+  { id: "cart-2", product: products[2], quantity: 1 },
+  { id: "cart-3", product: products[4], quantity: 1 },
 ];
 
 // 訂單資料
 const orders = [
   {
-    id: 'order-1',
+    id: "order-1",
     createdAt: 1704067200, // Unix timestamp
     paid: false,
     total: 2097,
-    user: { name: '王小明', tel: '0912345678', email: 'ming@example.com', address: '台北市信義區', payment: 'ATM' },
+    user: {
+      name: "王小明",
+      tel: "0912345678",
+      email: "ming@example.com",
+      address: "台北市信義區",
+      payment: "ATM",
+    },
     products: [
       { ...products[0], quantity: 2 },
-      { ...products[2], quantity: 1 }
-    ]
+      { ...products[2], quantity: 1 },
+    ],
   },
   {
-    id: 'order-2',
+    id: "order-2",
     createdAt: 1704153600,
     paid: true,
     total: 899,
-    user: { name: '李小華', tel: '0923456789', email: 'hua@example.com', address: '台中市西區', payment: 'Credit Card' },
-    products: [
-      { ...products[1], quantity: 1 }
-    ]
-  }
+    user: {
+      name: "李小華",
+      tel: "0923456789",
+      email: "hua@example.com",
+      address: "台中市西區",
+      payment: "Credit Card",
+    },
+    products: [{ ...products[1], quantity: 1 }],
+  },
 ];
 
 // ========================================
@@ -57,7 +102,7 @@ const orders = [
  */
 function getProductById(products, productId) {
   // 請實作此函式
-  return products.find(product => product.id === productId) || null
+  return products.find((product) => product.id === productId) || null;
 }
 
 /**
@@ -68,10 +113,10 @@ function getProductById(products, productId) {
  */
 function getProductsByCategory(products, category) {
   // 請實作此函式
-  if(category === '全部') {
-    return products
+  if (category === "全部") {
+    return products;
   } else {
-    return products.filter(product => product.category === category)
+    return products.filter((product) => product.category === category);
   }
 }
 
@@ -83,7 +128,7 @@ function getProductsByCategory(products, category) {
  */
 function getDiscountRate(product) {
   // 請實作此函式
-  return Math.round((product.price / product.origin_price) * 100) / 10 + '折'
+  return Math.round((product.price / product.origin_price) * 100) / 10 + "折";
 }
 
 /**
@@ -93,8 +138,8 @@ function getDiscountRate(product) {
  */
 function getAllCategories(products) {
   // 請實作此函式
-  const categorys = products.map(product => product.category)
-  return [...new Set(categorys)]
+  const categorys = products.map((product) => product.category);
+  return [...new Set(categorys)];
 }
 
 // ========================================
@@ -108,7 +153,10 @@ function getAllCategories(products) {
  */
 function calculateCartOriginalTotal(carts) {
   // 請實作此函式
-  return carts.reduce((per, cur) => per + cur.product.origin_price * cur.quantity, 0)
+  return carts.reduce(
+    (acc, cur) => acc + cur.product.origin_price * cur.quantity,
+    0,
+  );
 }
 
 /**
@@ -118,7 +166,7 @@ function calculateCartOriginalTotal(carts) {
  */
 function calculateCartTotal(carts) {
   // 請實作此函式
-  return carts.reduce((per, cur) => per + cur.product.price * cur.quantity, 0)
+  return carts.reduce((acc, cur) => acc + cur.product.price * cur.quantity, 0);
 }
 
 /**
@@ -128,7 +176,7 @@ function calculateCartTotal(carts) {
  */
 function calculateSavings(carts) {
   // 請實作此函式
-  return calculateCartOriginalTotal(carts) - calculateCartTotal(carts)
+  return calculateCartOriginalTotal(carts) - calculateCartTotal(carts);
 }
 
 /**
@@ -138,7 +186,7 @@ function calculateSavings(carts) {
  */
 function calculateCartItemCount(carts) {
   // 請實作此函式
-  return carts.reduce((acc,cur) => acc + cur.quantity ,0)
+  return carts.reduce((acc, cur) => acc + cur.quantity, 0);
 }
 
 /**
@@ -149,7 +197,7 @@ function calculateCartItemCount(carts) {
  */
 function isProductInCart(carts, productId) {
   // 請實作此函式
-  return carts.some(cart => cart.product.id === productId) 
+  return carts.some((cart) => cart.product.id === productId);
 }
 
 // ========================================
@@ -166,13 +214,13 @@ function isProductInCart(carts, productId) {
  */
 function addToCart(carts, product, quantity) {
   // 請實作此函式
-if (isProductInCart(carts, product.id)) {
+  if (isProductInCart(carts, product.id)) {
     const index = carts.findIndex((cart) => cart.product.id === product.id);
     const newCarts = carts.map((item, i) => {
       if (i === index) {
         return {
           ...item,
-          quantity: item.quantity + quantity
+          quantity: item.quantity + quantity,
         };
       } else {
         return item;
@@ -181,10 +229,11 @@ if (isProductInCart(carts, product.id)) {
     return newCarts;
   } else {
     const newProduct = {
-      id: new Date().getTime(), 
-      product, quantity: quantity
-    }
-    return [...carts, newProduct]
+      id: new Date().getTime(),
+      product,
+      quantity: quantity,
+    };
+    return [...carts, newProduct];
   }
 }
 
@@ -197,15 +246,15 @@ if (isProductInCart(carts, product.id)) {
  */
 function updateCartItemQuantity(carts, cartId, newQuantity) {
   // 請實作此函式
-  const index = carts.findIndex(cart => cart.id === cartId)
-  const newCart = [...carts]
-    if(newQuantity <= 0) {
-      newCart.splice(index, 1)
-      return newCart
-    } else {
-      newCart[index].quantity += newQuantity
-      return newCart
-    }
+  const index = carts.findIndex((cart) => cart.id === cartId);
+  const newCart = [...carts];
+  if (newQuantity <= 0) {
+    newCart.splice(index, 1);
+    return newCart;
+  } else {
+    newCart[index].quantity += newQuantity;
+    return newCart;
+  }
 }
 
 /**
@@ -216,10 +265,10 @@ function updateCartItemQuantity(carts, cartId, newQuantity) {
  */
 function removeFromCart(carts, cartId) {
   // 請實作此函式
-  const newCart = [...carts]
-  const index = carts.findIndex(cart => cart.id === cartId)
-  newCart.splice(index, 1)
-  return newCart
+  const newCart = [...carts];
+  const index = carts.findIndex((cart) => cart.id === cartId);
+  newCart.splice(index, 1);
+  return newCart;
 }
 
 /**
@@ -228,8 +277,8 @@ function removeFromCart(carts, cartId) {
  */
 function clearCart() {
   // 請實作此函式
-  carts.length = 0
-  return carts
+  carts.length = 0;
+  return carts;
 }
 
 // ========================================
@@ -243,8 +292,8 @@ function clearCart() {
  */
 function calculateTotalRevenue(orders) {
   // 請實作此函式
-  const paidOrder = orders.filter(order => order.paid)
-  return paidOrder.reduce((acc,cur) => acc + cur.total, 0)
+  const paidOrder = orders.filter((order) => order.paid);
+  return paidOrder.reduce((acc, cur) => acc + cur.total, 0);
 }
 
 /**
@@ -255,10 +304,10 @@ function calculateTotalRevenue(orders) {
  */
 function filterOrdersByStatus(orders, isPaid) {
   // 請實作此函式
-  if(isPaid) {
-    return orders.filter(order => order.paid)
+  if (isPaid) {
+    return orders.filter((order) => order.paid);
   } else {
-    return orders.filter(order => !order.paid)
+    return orders.filter((order) => !order.paid);
   }
 }
 
@@ -276,15 +325,15 @@ function filterOrdersByStatus(orders, isPaid) {
  */
 function generateOrderReport(orders) {
   // 請實作此函式
-  const total = orders.reduce((acc,cur) => (acc + cur.total)  ,0)
-  
+  const total = orders.reduce((acc, cur) => acc + cur.total, 0);
+
   return {
     totalOrders: orders.length,
     paidOrders: filterOrdersByStatus(orders, true),
     unpaidOrders: filterOrdersByStatus(orders, false),
     totalRevenue: calculateTotalRevenue(orders),
-    averageOrderValue: Math.round(total / orders.length)
-  }
+    averageOrderValue: Math.round(total / orders.length),
+  };
 }
 
 /**
@@ -298,16 +347,16 @@ function generateOrderReport(orders) {
  */
 function groupOrdersByPayment(orders) {
   // 請實作此函式
-  const groupOrders = orders.reduce((acc,cur) => {
-    const method = cur.user?.payment || 'UnKnown'
-    if(acc[method]) {
-      acc[method].push(cur)
+  const groupOrders = orders.reduce((acc, cur) => {
+    const method = cur.user?.payment || "UnKnown";
+    if (acc[method]) {
+      acc[method].push(cur);
     } else {
-      acc[method] = [cur]
+      acc[method] = [cur];
     }
-    return acc
-  },{})
-  return groupOrders
+    return acc;
+  }, {});
+  return groupOrders;
 }
 
 // ========================================
@@ -315,33 +364,36 @@ function groupOrdersByPayment(orders) {
 // ========================================
 
 // 任務一測試
-console.log('=== 任務一測試 ===');
-console.log('getProductById:', getProductById(products, 'prod-1'));
-console.log('getProductsByCategory:', getProductsByCategory(products, '衣服'));
-console.log('getDiscountRate:', getDiscountRate(products[0]));
-console.log('getAllCategories:', getAllCategories(products));
+console.log("=== 任務一測試 ===");
+console.log("getProductById:", getProductById(products, "prod-1"));
+console.log("getProductsByCategory:", getProductsByCategory(products, "衣服"));
+console.log("getDiscountRate:", getDiscountRate(products[0]));
+console.log("getAllCategories:", getAllCategories(products));
 
 // 任務二測試
-console.log('\n=== 任務二測試 ===');
-console.log('calculateCartOriginalTotal:', calculateCartOriginalTotal(carts));
-console.log('calculateCartTotal:', calculateCartTotal(carts));
-console.log('calculateSavings:', calculateSavings(carts));
-console.log('calculateCartItemCount:', calculateCartItemCount(carts));
-console.log('isProductInCart:', isProductInCart(carts, 'prod-1'));
+console.log("\n=== 任務二測試 ===");
+console.log("calculateCartOriginalTotal:", calculateCartOriginalTotal(carts));
+console.log("calculateCartTotal:", calculateCartTotal(carts));
+console.log("calculateSavings:", calculateSavings(carts));
+console.log("calculateCartItemCount:", calculateCartItemCount(carts));
+console.log("isProductInCart:", isProductInCart(carts, "prod-1"));
 
 // 任務三測試
-console.log('\n=== 任務三測試 ===');
-console.log('addToCart:', addToCart(carts, products[1], 2));
-console.log('updateCartItemQuantity:', updateCartItemQuantity(carts, 'cart-1', 5));
-console.log('removeFromCart:', removeFromCart(carts, 'cart-1'));
-console.log('clearCart:', clearCart());
+console.log("\n=== 任務三測試 ===");
+console.log("addToCart:", addToCart(carts, products[1], 2));
+console.log(
+  "updateCartItemQuantity:",
+  updateCartItemQuantity(carts, "cart-1", 5),
+);
+console.log("removeFromCart:", removeFromCart(carts, "cart-1"));
+console.log("clearCart:", clearCart());
 
 // 任務四測試
-console.log('\n=== 任務四測試 ===');
-console.log('calculateTotalRevenue:', calculateTotalRevenue(orders));
-console.log('filterOrdersByStatus:', filterOrdersByStatus(orders, true));
-console.log('generateOrderReport:', generateOrderReport(orders));
-console.log('groupOrdersByPayment:', groupOrdersByPayment(orders));
+console.log("\n=== 任務四測試 ===");
+console.log("calculateTotalRevenue:", calculateTotalRevenue(orders));
+console.log("filterOrdersByStatus:", filterOrdersByStatus(orders, true));
+console.log("generateOrderReport:", generateOrderReport(orders));
+console.log("groupOrdersByPayment:", groupOrdersByPayment(orders));
 
 // ========================================
 // 匯出函式供測試使用
@@ -363,5 +415,5 @@ module.exports = {
   calculateTotalRevenue,
   filterOrdersByStatus,
   generateOrderReport,
-  groupOrdersByPayment
+  groupOrdersByPayment,
 };
